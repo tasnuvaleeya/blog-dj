@@ -1,0 +1,1 @@
+web: gunicorn project_blog/project_blog.wsgi
