@@ -2,9 +2,21 @@ version: '3.8'
 
 services:
   web:
-    build: ./project_blog
+    build: .
     command: python manage.py runserver 0.0.0.0:8085
     volumes:
-    - ./project_blog:/home/shahriar/Work/django-docker/
+    - .:/home/shahriar/Work/django-docker/
     ports:
     - 8085:8085
+    env_file:
+      - ./.env.dev
+  db:
+    image: postgres:12.0-alpine
+    volumes:
+    - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=project_blog
+      - POSTGRES_PASSWORD=project_blog
+      - POSTGRES_DB=project_blog_dev
+volumes:
+  postgres_data:
