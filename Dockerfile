@@ -13,5 +13,10 @@ RUN pip install psycopg2
 COPY ./requirements.txt .
 
 RUN pip3 install -r requirements.txt
-
+COPY ./script.sh .
+RUN chmod 755 script.sh
+COPY manage.py .
 COPY . .
+
+# run entrypoint.sh
+ENTRYPOINT ["./script.sh"]
